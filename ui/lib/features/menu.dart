@@ -19,13 +19,11 @@ class _MenuWidgetState extends State<MenuWidget> {
   }
 
   Future<List<String>> fetchData() async {
-    final response = await http.get(
-      Uri.parse('https://catfact.ninja/facts?limit=5'),
-    );
+    final response = await http.get(Uri.parse('localhost:8080/db'));
 
     if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body)['data'];
-      return data.map((el) => el['fact'].toString()).toList();
+      List<dynamic> data = json.decode(response.body)['Data'];
+      return data.map((el) => el['Name'].toString()).toList();
     }
     return ["you fcked it"];
   }
@@ -49,6 +47,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                   return const CircularProgressIndicator();
                 }
                 return ListView.builder(
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     return Text(snapshot.data![index]);
                   },
