@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/features/menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  List<String> items = ["Cat", "Dog"];
 
   void _incrementCounter() {
     setState(() {
@@ -46,14 +48,22 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),  
+            Expanded(flex: 2, child: MenuWidget()),
+            Expanded(
+              flex: 8,
+              child: Column(
+                children: <Widget>[
+                  Text('You have pushed the button this many times:'),
+                  Text(
+                    '$_counter',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
